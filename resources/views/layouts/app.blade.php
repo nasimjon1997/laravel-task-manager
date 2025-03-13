@@ -1,12 +1,26 @@
+<!-- resources/views/layouts/app.blade.php -->
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-@if(session('success'))
-    <p style="color: green;">{{ session('success') }}</p>
-@endif
-@yield('content')
+<div class="container">
+@include('layouts.navbar')  <!-- Включаем navbar -->
+
+    <div class="row">
+    @include('layouts.sidebar')  <!-- Включаем sidebar -->
+
+        <div class="col-md-9">
+        @yield('content')  <!-- Здесь будет основной контент страницы -->
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

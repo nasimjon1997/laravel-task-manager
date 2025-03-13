@@ -1,20 +1,37 @@
+<!-- resources/views/tasks/index.blade.php -->
+
 @extends('layouts.app')
 
 @section('content')
-    <h1>Tasks</h1>
-    <a href="{{ route('tasks.create') }}">Create New Task</a>
+    <h1>Task List</h1>
+    <a href="{{ route('tasks.create') }}" class="btn btn-primary">Create New Task</a>
 
-    <ul>
+    <table class="table mt-4">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
         @foreach ($tasks as $task)
-            <li>
-                <a href="{{ route('tasks.show', $task) }}">{{ $task->title }}</a>
-                <a href="{{ route('tasks.edit', $task) }}">Edit</a>
-                <form action="{{ route('tasks.destroy', $task) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Delete</button>
-                </form>
-            </li>
+            <tr>
+                <td>{{ $task->id }}</td>
+                <td>{{ $task->title }}</td>
+                <td>{{ $task->status }}</td>
+                <td>
+                    <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <!-- Кнопка для открытия модального окна -->
+                    <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
         @endforeach
-    </ul>
+        </tbody>
+    </table>
 @endsection
